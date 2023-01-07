@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>complete responsive hospital website design </title>
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+
+<!-- header section starts  -->
+<header class="header">
+    <a href="#" class="logo"><i class="fas fa-heartbeat"></i> Jones Christain Academy. </a>
+
+    <nav class="navbar">
+        <a href="{% url 'home' %}">home</a>
+        <a href="{% url 'home' %}">about</a>
+        <a href="{% url 'home' %}">News/Activities</a>
+        <a href="{% url 'home' %}">Teachers</a>
+        <a href="{% url 'home' %}">review</a>
+        <a href="{% url 'home' %}">blogs</a>
+        <a href="{% url 'home' %}">Contact Us</a>
+
+        {% if request.user.is_staff %}
+            <a href="{% url 'news_form' %}">News form</a>
+            <a href="{% url 'blog_form' %}">Blog form</a>
+        {% endif %}
+    </nav>
+    <div id="menu-btn" class="fas fa-bars"></div>
+</header>
+
+<!-- header section ends -->
+
+<!-- Contact section starts -->
+<section class="book" id="contact">
+    <h1 class="heading"> <span>Contact</span> Us </h1>
+    <div class="row">
+        <div class="image">
+        <img src="{% static 'images/about-img.png' %}" alt="">
+        </div>
+
+        {% if submitted %}
+            <p class="success">
+                Your message was submitted successfully. Thank you
+            </p>
+        {% else %}
+            <form action="" method="POST">
+                <h3>Let's hear from you</h3>
+                {% csrf_token %}
+
+                <table>
+                    {{ form.as_table }}
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><input type="submit" value="submit"></td>
+                    </tr>
+                </table>
+            </form>
+        {% endif %}
+    </div>
+</section>
+<!-- contact section ends -->
+
+<!--footer section starts-->
+{% include 'JCABASE/footer.html' %}
+<!--footer section ends-->
+
+<!-- custom js file link  -->
+<script>
+    let menu = document.querySelector('#menu-btn');
+let navbar = document.querySelector('.navbar');
+
+menu.onclick = () =>{
+    menu.classList.toggle('fa-times');
+    navbar.classList.toggle('active');
+}
+
+window.onscroll = () =>{
+    menu.classList.remove('fa-times');
+    navbar.classList.remove('active');
+}
+</script>
+
+</body>
+</html>

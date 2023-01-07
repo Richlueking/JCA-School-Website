@@ -1,0 +1,28 @@
+
+{% load static %}
+<!-- review section starts  -->
+
+<section class="review" id="review">
+    <h1 class="heading"> Parent's <span>Review</span> </h1>
+    <div class="box-container">
+
+        {% for review in parent_reviews %}
+            <div class="box">
+                <img src="{{review.parent_pic.url}}" alt="">
+                <h3>{{review.parent_name}}</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="text">{{review.remark}}!</p>
+            </div>
+        {% endfor %}
+
+
+    </div>
+</section>
+
+<!-- review section ends -->

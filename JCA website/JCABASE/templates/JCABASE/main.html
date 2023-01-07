@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>complete responsive hospital website design </title>
+    <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+
+<!-- header section starts  -->
+{% include 'JCABASE/navbar.html' %}
+<!-- header section ends -->
+
+
+<!-- home section starts  -->
+<section class="home" id="home">
+    <div class="image">
+        <img src="{% static 'images/jac17.JPG' %}" alt="">
+    </div>
+
+    <div class="content">
+        <h3>Slogan Slogan Slogan</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem sed autem vero? Magnam, est laboriosam!</p>
+        <a href="{% url 'contact' %}" class="btn"> contact us <span class="fas fa-chevron-right"></span> </a>
+    </div>
+</section>
+<!-- home section ends -->
+
+
+<!-- icons section starts  -->
+<section class="icons-container">
+
+    <div class="icons">
+        <i class="fas fa-user-md"></i>
+        <h3>1000+</h3>
+        <p>Students</p>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-users"></i>
+        <h3>100+</h3>
+        <p>Staffs</p>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-procedures"></i>
+        <h3>20+</h3>
+        <p>Class Rooms</p>
+    </div>
+
+</section>
+
+<!-- icons section ends -->
+
+<!-- about section starts  -->
+<section class="about" id="about">
+    <h1 class="heading"> <span>about</span> us </h1>
+    <div class="row">
+        <div class="image">
+            <img src="{% static 'images/jac11.JPG' %}" alt="">
+        </div>
+
+        <div class="content">
+            <h3>Loren Ipsum Ipsum</h3>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure ducimus, quod ex cupiditate ullam in assumenda maiores et culpa odit tempora ipsam qui, quisquam quis facere iste fuga, minus nesciunt.</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus vero ipsam laborum porro voluptates voluptatibus a nihil temporibus deserunt vel?</p>
+            <a href="{% url 'about' %}" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+        </div>
+    </div>
+
+</section>
+<!-- about section ends -->
+
+
+<!-- news/activity section starts  -->
+
+<section class="services" id="news">
+    <h1 class="heading">Recent News & <span>Activities</span> </h1>
+    <div class="box-container">
+
+        {% for post in news_latest %}
+            <div class="box">
+             <img class="news_pic" src="{{post.news_pic.url}}" alt="img">
+                <h3>{{post.news_title}}</h3>
+                <a href="{% url 'news_detail' post.id %}" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+
+            </div>
+        {% endfor %}
+        <a href="{% url 'news' %}" class="btn">learn more<span class="fas fa-chevron-right"></span> </a>
+    </div>
+</section>
+
+<!-- news/activity section ends -->
+
+
+<!-- teachers section starts  -->
+        <section class="doctors" id="teachers">
+            <h1 class="heading"> our <span>Teachers</span> </h1>
+            <div class="box-container">
+
+                {% for teacher in teachers %}
+                   <div class="box">
+                   <img src="{{teacher.teacher_pic.url}}" alt="">
+
+                        <h3>{{teacher.teacher_name}}</h3>
+                        <span>{{teacher.teacher_title}}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+<!-- teachers section ends -->
+
+
+<!--parents section starts-->
+{% include 'JCABASE/parents_review.html' %}
+<!--parents section ends-->
+
+<!-- blogs section starts  -->
+<section class="blogs" id="blogs">
+    <h1 class="heading"> our <span>blogs</span> </h1>
+    <div class="box-container">
+
+        {% for blog in blog_latest %}
+            <div class="box">
+                <div class="image">
+                <img src="{{blog.blog_pic.url}}" alt="">
+                </div>
+
+                <div class="content">
+                    <div class="icon">
+                        <a href="#"> <i class="fas fa-calendar"></i>{{blog.created}}</a>
+                        <a href="#"> <i class="fas fa-user"></i>{{blog.writer}}</a>
+                    </div>
+                    <h3>{{blog.blog_title}}</h3>
+                    <a href="{% url 'blog' blog.id %}" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+                </div>
+            </div>
+        {% endfor %}
+
+        <a href="{% url 'blogs' %}" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+    </div>
+</section>
+<!-- blogs section ends -->
+
+
+ {% block content %}
+
+ {% endblock %}
+
+
+<!--footer section starts-->
+{% include 'JCABASE/footer.html' %}
+<!--footer section ends-->
+
+<!-- custom js file link  -->
+<script>
+    let menu = document.querySelector('#menu-btn');
+let navbar = document.querySelector('.navbar');
+
+menu.onclick = () =>{
+    menu.classList.toggle('fa-times');
+    navbar.classList.toggle('active');
+}
+
+window.onscroll = () =>{
+    menu.classList.remove('fa-times');
+    navbar.classList.remove('active');
+}
+</script>
+
+</body>
+</html>
